@@ -2,7 +2,12 @@
   "name": "md-links",
   "version": "0.1.0",
   "description": "* [1. Preámbulo](#1-preámbulo)\r * [2. Resumen del proyecto](#2-resumen-del-proyecto)\r * [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)\r * [4. Consideraciones generales](#4-consideraciones-generales)\r * [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)\r * [6. Entregables](#6-entregables)\r * [7. Hacker edition](#7-hacker-edition)\r * [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)\r * [9. Checklist](#9-checklist)\r * [10. Achicando el problema](#10-achicando-el-problema)",
-  "main": "index.js",
+  "bin":{
+   "md-links":"cli.js"
+  },
+
+
+  "main": "cli.js",
   "type": "module",
   "directories": {
     "test": "test"
@@ -18,8 +23,8 @@
     "url": "git+https://github.com/JenyferMarquez/LIM016-md-links.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Jenyfer Márquez",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JenyferMarquez/LIM016-md-links/issues"
   },
@@ -33,7 +38,9 @@
   "dependencies": {
     "babel-jest": "^27.5.1",
     "chalk": "^5.0.0",
+    "comander": "^0.0.1-security",
     "eslint": "^8.8.0",
+    "figlet": "^1.5.2",
     "fs": "^0.0.1-security",
     "jest": "^27.5.1",
     "jsdom": "^19.0.0",

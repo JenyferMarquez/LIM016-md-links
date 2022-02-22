@@ -5,22 +5,28 @@ import jsdom from 'jsdom';
 const { JSDOM } = jsdom;
 import fetch from 'node-fetch';
 
-//et route = process.argv[1];
-//console.log(process.argv[1])
-/*let route = "C:/Users/Laboratoria/Desktop/md/LIM016-md-links/prueba general/prueba"*/
-let route = "C:/Users/Laboratoria/Desktop/md/LIM016-md-links/README.md"
+let route = process.argv[2];
+//console.log(route);
+//let route = "C:/Users/Laboratoria/Desktop/md/LIM016-md-links/prueba_general/prueba/archivo1.md"
+//let route = "C:/Users/Laboratoria/Desktop/md/LIM016-md-links"
 
 //la ruta existe
 export const pathExists = (route) => fs.existsSync(route);
 // const pathExists=(route)=>
-console.log(pathExists(route), " hola");
+//console.log(pathExists(route), " hola");
 // obteniendo una ruta absoluta
 
 export const getAbsoluteRoute = (route) => (path.isAbsolute(route) ? (route) : path.resolve(route));
 
-console.log(getAbsoluteRoute(route));
+//console.log(getAbsoluteRoute(route));
+
 
 export const isDir =(route) =>fs.statSync(route).isDirectory()
+//console.log(isDir(route));
+
+ // leer el contenido del directorio
+
+ export const getDirectoryContent= (routeDir) => fs.readdirSync(routeDir);
 
 //console.log(isDir("C:/Users/Laboratoria/Desktop/md/LIM016-md-links/prueba general"));
 
@@ -31,59 +37,58 @@ export const isMdFile = (route) => (path.extname(route) === '.md');
 //console.log(isMdFile(route));
 
 
-/*export const getMdFiles = (route) => {
+export const getMdFiles = (route) => {
   let allMdFiles = [];
-  //const route = getAbsoluteRoute(route);
-
-  if(isDir(route)){
+  const ruta=  getAbsoluteRoute(route)
+  if(isDir(ruta)){
     //leer contenido
-    const contenidoDirectorio = fs.readdirSync(route, "utf-8")
+    const contenidoDirectorio = getDirectoryContent(ruta)
     //console.log(contenidoDirectorio, "contenido  ")
     contenidoDirectorio.forEach((file) =>{
-      const unirRutas =path.join(route , file);
-      //console.log(unirRutas, "uniendo  rutas")
+      const rutaAbsoluta = path.join(ruta , file);
+      //console.log(rutaAbsoluta)
     //recursividad  - estas nuevas  rutas le pertenecen a un directorio
-     if( isDir(unirRutas)){
-      allMdFiles = allMdFiles.concat(getMdFiles(unirRutas))
-      console.log(allMdFiles,"trayendo rutas")
-     }else if(isMdFile(unirRutas)){
+     if( isDir(rutaAbsoluta)){
+      allMdFiles = allMdFiles.concat(getMdFiles(rutaAbsoluta))
+      //console.log(allMdFiles,"trayendo rutas")
+     } else if(isMdFile(rutaAbsoluta)){
 
-      allMdFiles.push(unirRutas);
+      allMdFiles.push(rutaAbsoluta);
      }
 
     })
-  }else if (isMdFile(route)){
+  }else if (isMdFile(ruta)) {
 
-    allMdFiles.push(unirRutas);
+    allMdFiles.push(ruta);
     
    
   }
    return allMdFiles;
   }
     
-getMdFiles(route);*/
+//console.log(getMdFiles(route));
 
 
-export const getMdFiles = (routeDir) => {
+/*const getMdFiles = (routeDir) => {
   let allMdFiles = [];
   const route = getAbsoluteRoute(routeDir);
   if (fs.lstatSync(route).isFile()) {
     if (isMdFile(route)) allMdFiles.push(route);
   } else {
-    fs.readdirSync(route).forEach((file) => {
+    getDirectoryContent(route).forEach((file) => {
       const mdfile = getMdFiles(path.join(route, file));
       allMdFiles = allMdFiles.concat(mdfile);
     });
   }
   return allMdFiles;
-};
-
-getMdFiles(route)
+};*/
+//console.log(getMdFiles(route))
 //  funcion que recorra lea  archivos md y que devuelva los links
    
-export const getMdLinks = (route) => {
+ export const getMdLinks = (route) => {
   //obteniendo mdfiles
   const mdFiles = getMdFiles(route);
+
   const arrDom = [];
   mdFiles.forEach((mdFile) => {
     const data = fs.readFileSync(mdFile, 'utf8');
@@ -102,7 +107,7 @@ export const getMdLinks = (route) => {
     return arrDom;
   };
 
-console.log(getMdLinks(route),"trayendo links");
+//console.log(getMdLinks(route),"trayendo links");
 
 
 export const validateLinks= (route)=>{
@@ -130,8 +135,8 @@ export const validateLinks= (route)=>{
    return Promise.all(validateOpt);
 };
 
-
-validateLinks(route)
+/*validateLinks(route)
 .then((res)=>console.log(res))
-.catch((error)=> console.log(error))
+.catch((error)=> console.log(error))*/
 
+//console.log(getMdLinks([path.join( process.cwd(), "prueba_general/prueba/archivo2.md")][0]));

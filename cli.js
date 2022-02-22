@@ -1,22 +1,72 @@
-import chalk from 'chalk';
-import mdLinks from "./mdlinks.js";
-import Stats from "./stats.js";
+#!/usr/bin/env node
 
-const controlador = (route, options)=>{
+import chalk from "chalk";
+import figlet from "figlet";
+import {total,unique,broken,help } from "./stats.js";
+import { mdLinks } from "./md-links.js";
 
-mdLinks(route, options)
-    .then((links)=>{
-            const linkHref =[ ];
-            let linkBroken= 0;
-            links.forEach((link)=>{
-            if(link.status<= 500 && link.status >400) linkBroken +=1;
-            if(!options.validate && !options.Stats){
 
-                 console.log(chalk.cyan(link.file, link.herf, link.text));   
+const banner = figlet.textSync('<Md-Links>', {
+  font: 'Georgia11',
+  horizontalLayout: 'default',
+  verticalLayout: 'default',
+  width:100,
+  whitespaceBreak: true,
+});
 
-            }
+console.log(chalk.cyan.bold(banner));
+const path = process.argv[2];
+const options = process.argv[3];
+const status = process.argv[4];
 
-            
-      };
+if (options === '--validate' && status === '--stats' || status === '--stats' && options === '--validate' || options === '--s' && status === '--v' || options === '--v' && status === '--s') {
+  mdLinks(path, { validate: true })
+    .then(res => {
+      
+      console.log(chalk.bgBlue.black(`Total:  ${total(res)}`));
+      console.log(chalk.bgGreen.black(`Unique: ${unique(res)}`));
+      console.log(chalk.bgRed.black(`Broken: ${broken(res)}`));
+    })
+    .catch(error => console.log(error));
+} else if(options === '--help'|| options=== '--h' ){
+  
+   console.log(chalk.cyan.bold(help))
 
-      export default controlador;
+
+}else if (options === '--validate' || options === '--v') {
+  mdLinks(path, { validate: true })
+  .then((res) => {
+    res.forEach((e) => {
+     if(e.status===200){
+      console.log(chalk.blue(`'✔ href:'${chalk.blue(e.href)}\n'✔ text:' ${chalk.blue(e.text)}\n'✔ file:'${chalk.blue(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.blue(e.statusText)}\n `));
+     }
+     if(e.status===500){
+      console.log(chalk.red(`'✔ href:'${chalk.red(e.href)}\n'✔ text:' ${chalk.red(e.text)}\n'✔ file:'${chalk.red(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.red(e.statusText)}\n `));
+     }
+    
+    });
+    
+    
+    
+  })  
+    .catch(error => console.log(error));
+} else if (options === '--stats' || options === '--s') {
+  mdLinks(path, { validate: true })
+    .then(res => {
+      console.log(chalk.bgBlue.black(`Total:  ${total(res)}`));
+      console.log(chalk.bgBlue.black(`Unique: ${unique(res)}`));
+    })
+    .catch(error => console.log(error));
+} else {
+  mdLinks(path, { validate: false })
+  .then(res => {
+    res.forEach((e) => 
+    console.log(chalk.blue(`'✔ href:'${chalk.cyan(e.href)}\n'✔ text:' ${chalk.cyan(e.text)}\n'✔ file:'${chalk.cyan(e.file)}\n`)));
+  })
+    .catch(err => console.log(chalk.redBright(err)));
+}
+
+
+  /*mdLinks(process.argv[2], false)
+.then((res)=> console.log(res))
+.catch((err)=> console.log(err))*/

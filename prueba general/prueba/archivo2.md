@@ -1,1 +1,0 @@
-https://translate.google.com.pe/?hl=es-419&tab=wT&sl=es&tl=en&text=unir%20Rutas&op=translate

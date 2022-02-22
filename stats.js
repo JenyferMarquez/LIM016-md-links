@@ -1,34 +1,47 @@
+import chalk from "chalk";
 
 
-/*const totalLinks = (array) => {
+export const total = (array) => {
     const total = array.length;
-    return `Total: ${total}`;
+    return total;
   };
   
-  const uniqueLinks = (array) => {
-    const unique = [...new Set(array.map((link) => link.href))];
-    return `Unicos: ${unique.length}`;
+  export const unique = (array) => {
+    const unique = [...new Set(array.map((link) => link.href))].length;
+    return unique;
   };
   
-  const brokenLinks = (array) => {
-    const broken = array.filter((link) => link.status< 200 || link.status>= 400 || link.statusText === 'FAIL');
-    return `Rotos: ${broken.length}`;
-  };*/
+  export const broken = (array) => {
+    const broken = array.filter((link) => link.status< 200 || link.status>= 400 || link.statusText === 'FAIL').length;
+    return broken;
+  };
 
 
 
-  export const Stats = (array) => {
-    const total= array.length
-    const brokens = array.filter((link) => link.statusText === 'FAIL'||link.status>= 400).length;
-    const unique= new Set(array.map(({ href }) => href)).size
+export const help=`
+
+ ********************************************  (${chalk.cyan('HELP')}) **************************************************
  
-    return  ` Total: ${total} \n Unique:${unique} \n Broken:${brokens}`;    
+ ${chalk.cyan('--validate ó --v')}                              Retorna el link, el texto, la ruta, el status y el mensaje. 
+
+ ${chalk.cyan('--stats ó --s')}                                 Retorna el número total de links y los links únicos.  
+
+ ${chalk.cyan('--stats --validate ó --validate --stats')}       Retorna los links totales, únicos y rotos.   
+    
+ *******************************************************************************************************`; 
+
+
+ /*const statsLinks = (linkhref) => {
+  const total = linkhref.length;
+  // eslint-disable-next-line max-len
+  const unique = linkhref.reduce((count, href) => (linkhref.indexOf(href) === linkhref.lastIndexOf(href) ? count + 1 : count), 0);
+  return `Total: ${total} \nUnique: ${unique}`;
 };
 
+export default statsLinks;*/
 
 
-
-const prueba = [
+/*const prueba = [
  {
     href: '#1-pre%C3%A1mbulo',
     text: '1. Preámbulo',
@@ -85,9 +98,24 @@ const prueba = [
     status: 200,
     statusText: 'OK'
   }
+
 ]
 
-/*console.log(totalLinks(prueba))
-console.log(uniqueLinks(prueba))
-console.log(brokenLinks(prueba))*/
-console.log(Stats(prueba))
+console.log(total(prueba))
+console.log(unique(prueba))
+console.log(broken(prueba))*/
+//console.log(stats(prueba))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
