@@ -138,5 +138,4 @@ export const validateLinks= (route)=>{
 /*validateLinks(route)
 .then((res)=>console.log(res))
 .catch((error)=> console.log(error))*/
-
 //console.log(getMdLinks([path.join( process.cwd(), "prueba_general/prueba/archivo2.md")][0]));

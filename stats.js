@@ -1,7 +1,8 @@
-import chalk from "chalk";
+
 
 
 export const total = (array) => {
+  
     const total = array.length;
     return total;
   };
@@ -18,17 +19,7 @@ export const total = (array) => {
 
 
 
-export const help=`
 
- ********************************************  (${chalk.cyan('HELP')}) **************************************************
- 
- ${chalk.cyan('--validate ó --v')}                              Retorna el link, el texto, la ruta, el status y el mensaje. 
-
- ${chalk.cyan('--stats ó --s')}                                 Retorna el número total de links y los links únicos.  
-
- ${chalk.cyan('--stats --validate ó --validate --stats')}       Retorna los links totales, únicos y rotos.   
-    
- *******************************************************************************************************`; 
 
 
  /*const statsLinks = (linkhref) => {
@@ -41,7 +32,7 @@ export const help=`
 export default statsLinks;*/
 
 
-/*const prueba = [
+export const prueba = [
  {
     href: '#1-pre%C3%A1mbulo',
     text: '1. Preámbulo',
@@ -101,10 +92,12 @@ export default statsLinks;*/
 
 ]
 
-console.log(total(prueba))
+/*console.log(total(prueba))
 console.log(unique(prueba))
 console.log(broken(prueba))*/
 //console.log(stats(prueba))
+
+
 
 
 

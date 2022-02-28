@@ -2,11 +2,12 @@
 
 import chalk from "chalk";
 import figlet from "figlet";
-import {total,unique,broken,help } from "./stats.js";
+import {total, unique, broken } from "./stats.js";
+import {help} from "./help.js";
 import { mdLinks } from "./md-links.js";
 
 
-const banner = figlet.textSync('<Md-Links>', {
+const banner = figlet.textSync('<Mq-Links>', {
   font: 'Georgia11',
   horizontalLayout: 'default',
   verticalLayout: 'default',
@@ -38,10 +39,10 @@ if (options === '--validate' && status === '--stats' || status === '--stats' && 
   .then((res) => {
     res.forEach((e) => {
      if(e.status===200){
-      console.log(chalk.blue(`'✔ href:'${chalk.blue(e.href)}\n'✔ text:' ${chalk.blue(e.text)}\n'✔ file:'${chalk.blue(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.blue(e.statusText)}\n `));
+      console.log(chalk.blue(`'✔ href:'${chalk.blue(e.href)}\n'✔ text:' ${chalk.blue(e.text)}\n'✔ file:'${chalk.blue(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.blue(e.statusText)}\n`));
      }
      if(e.status===500){
-      console.log(chalk.red(`'✔ href:'${chalk.red(e.href)}\n'✔ text:' ${chalk.red(e.text)}\n'✔ file:'${chalk.red(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.red(e.statusText)}\n `));
+      console.log(chalk.red(`'✔ href:'${chalk.red(e.href)}\n'✔ text:' ${chalk.red(e.text)}\n'✔ file:'${chalk.red(e.file)}\n'✔ status:'${chalk.yellowBright(e.status)}\n'✔ message:'${chalk.red(e.statusText)}\n`));
      }
     
     });
