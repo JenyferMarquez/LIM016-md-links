@@ -20,7 +20,7 @@ const path = process.argv[2];
 const options = process.argv[3];
 const status = process.argv[4];
 
-if (options === '--validate' && status === '--stats' || status === '--stats' && options === '--validate' || options === '--s' && status === '--v' || options === '--v' && status === '--s') {
+if (options === '--validate' && status === '--stats' || options === '--stats' && status === '--validate' || options === '--s' && status === '--v' || options === '--v' && status === '--s') {
   mdLinks(path, { validate: true })
     .then(res => {
       
@@ -54,8 +54,8 @@ if (options === '--validate' && status === '--stats' || status === '--stats' && 
 } else if (options === '--stats' || options === '--s') {
   mdLinks(path, { validate: true })
     .then(res => {
-      console.log(chalk.bgBlue.black(`Total:  ${total(res)}`));
-      console.log(chalk.bgBlue.black(`Unique: ${unique(res)}`));
+      console.log(chalk.bgBlue.bold.black(`Total:  ${total(res)} `));
+      console.log(chalk.bgBlue.bold.black(`Unique: ${unique(res)} `));
     })
     .catch(error => console.log(error));
 } else {

@@ -18,7 +18,10 @@ export const pathExists = (route) => fs.existsSync(route);
 
 export const getAbsoluteRoute = (route) => (path.isAbsolute(route) ? (route) : path.resolve(route));
 
-//console.log(getAbsoluteRoute(route));
+//console.log(getAbsoluteRoute("prueba_general/prueba/archivo2.md"));
+
+
+
 
 
 export const isDir =(route) =>fs.statSync(route).isDirectory()
@@ -40,7 +43,7 @@ export const isMdFile = (route) => (path.extname(route) === '.md');
 export const getMdFiles = (route) => {
   let allMdFiles = [];
   const ruta=  getAbsoluteRoute(route)
-  if(isDir(ruta)){
+  if(isDir(route)){
     //leer contenido
     const contenidoDirectorio = getDirectoryContent(ruta)
     //console.log(contenidoDirectorio, "contenido  ")
@@ -48,12 +51,12 @@ export const getMdFiles = (route) => {
       const rutaAbsoluta = path.join(ruta , file);
       //console.log(rutaAbsoluta)
     //recursividad  - estas nuevas  rutas le pertenecen a un directorio
-     if( isDir(rutaAbsoluta)){
+     if(isDir(rutaAbsoluta)){
       allMdFiles = allMdFiles.concat(getMdFiles(rutaAbsoluta))
       //console.log(allMdFiles,"trayendo rutas")
      } else if(isMdFile(rutaAbsoluta)){
 
-      allMdFiles.push(rutaAbsoluta);
+     (allMdFiles.push(rutaAbsoluta));
      }
 
     })
@@ -69,7 +72,7 @@ export const getMdFiles = (route) => {
 //console.log(getMdFiles(route));
 
 
-/*const getMdFiles = (routeDir) => {
+/*export const getMdFiles = (routeDir) => {
   let allMdFiles = [];
   const route = getAbsoluteRoute(routeDir);
   if (fs.lstatSync(route).isFile()) {
@@ -110,32 +113,30 @@ export const getMdFiles = (route) => {
 //console.log(getMdLinks(route),"trayendo links");
 
 
+
 export const validateLinks= (route)=>{
    const links=  getMdLinks(route);
    const validateOpt = links.map((link)=> fetch (link.href)
-   .then((res) => ({
+   .then((res) => {
 
-    href: link.href,
-    text: link.text,
-    file: link.file,
-    status: res.status,
-    statusText: res.statusText,
+    
+    link.status= res.status,
+    link.statusText= res.statusText;
 
+    return link
+  })
+    .catch(() => {
 
-  }))
-    .catch((error) => ({
+   
+      link.status= 500,
+      link.statusText= 'FAIL';
 
-      href: link.href,
-      text: link.text,
-      file: link.file,
-      status: 500,
-      statusText: 'FAIL',
-
-    })))
-   return Promise.all(validateOpt);
+      return link
+    }))
+    return Promise.all(validateOpt);
 };
 
 /*validateLinks(route)
 .then((res)=>console.log(res))
-.catch((error)=> console.log(error))*/
-//console.log(getMdLinks([path.join( process.cwd(), "prueba_general/prueba/archivo2.md")][0]));
+.catch((error)=> console.log(error))
+//console.log(getMdLinks([path.join( process.cwd(), "prueba_general/prueba/archivo2.md")][0]));*/

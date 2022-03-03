@@ -93,11 +93,12 @@ describe ("getMdFiles",()=>{
     expect(getMdFiles("prueba_general/prueba")).toEqual([path.join( process.cwd(), "prueba_general/prueba/archivo.md"), path.join( process.cwd(), "prueba_general/prueba/archivo1.md"), path.join( process.cwd(), "prueba_general/prueba/archivo2.md")]);
    });
 
+
    it('Should return all files', () => {
     expect(getMdFiles("README.md")).toEqual([path.join( process.cwd(), "README.md")]);
    });
 
-
+ 
 });
 
 
@@ -120,8 +121,6 @@ describe ("getMdLinks",()=>{
     ]);
     
    });
-
- 
-
-
+   
+  
 });
