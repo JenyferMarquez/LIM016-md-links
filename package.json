@@ -1,6 +1,6 @@
 {
-  "name": "mq-links",
-  "version": "0.1.0",
+  "name": "@jenyfermarqez/mq-links",
+  "version": "1.0.0",
   "description": "Library that allows you to see the status of your links contained in your markdown files along with some statistics.",
   "bin": {
     "mq-links": "cli.js"

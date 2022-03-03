@@ -8,7 +8,9 @@
 This module extracts all the links that are in a Markdown file, it has the following options:
 
 --validate: Check if there are valid or broken links
+
 --stats: Shows a statistic of the total number of links and how many of them are unique.
+
 --validate --stats: Adds to the statistics the total amount of broken links.
 
 
@@ -18,7 +20,9 @@ This module extracts all the links that are in a Markdown file, it has the follo
 
 ### Installation 🔧
 Install NPM packages
-
+```sh
+ npm  install @jenyfermarqez/mq-links
+ ```
 
 ### Usage
 
@@ -64,7 +68,7 @@ mq-links <path-to-file> --validate --stats
 #### Case 5: 
 
 ```sh 
-md-links --help
+md-links <path-to-file> --help
 ```
 
 [![README-md-LIM016-md-links-Visual-Studio-Code-3-03-2022-02-39-55-2.png](https://i.postimg.cc/63HJXhQW/README-md-LIM016-md-links-Visual-Studio-Code-3-03-2022-02-39-55-2.png)](https://postimg.cc/5YFk5LvT)
